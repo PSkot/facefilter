@@ -8,14 +8,14 @@ from matplotlib.patches import Rectangle, Circle
 # Open video file
 cap = cv2.VideoCapture(0)
 mask = cv2.imread('mask.png')
-mask = cv2.resize(mask, (mask.shape[0]//7, mask.shape[1]//35))
+mask = cv2.resize(mask, (mask.shape[0]//12, mask.shape[1]//50))
 detector = MTCNN()
 alpha_s = mask[:, :, 2] / 255.0
 alpha_l = 1.0 - alpha_s
 if cap.isOpened() == False:
     print("Error opening video stream or file")
 
-frame_rate = 80
+frame_rate = 20
 prev = 0
 
 while(cap.isOpened()):
@@ -32,10 +32,8 @@ while(cap.isOpened()):
             for face in faces:
                 x, y, width, height = face['box']
 
-                print(width, height)
-
-                y_offset = y + 55
-                x_offset = x + 10
+                y_offset = y + 20
+                x_offset = x - 25
                 y1, y2 = y_offset, y_offset + mask.shape[0]
                 x1, x2 = x_offset, x_offset + mask.shape[1]
 
